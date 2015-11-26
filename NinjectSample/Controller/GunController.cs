@@ -7,6 +7,7 @@ namespace NinjectSample.Controller
 {
     public class GunController
     {
+        private const double Version = 0.2;
         private readonly IKernel _kernel;
         private IGun _selectedGun;
 
@@ -20,6 +21,7 @@ namespace NinjectSample.Controller
             _kernel = kernel;
             InitiaizeKernel();
 
+            Console.WriteLine("Welcome to Gun Simulator " + Version + "\n=======================\n");
             GunSelection();
             while (true)
             {
@@ -47,23 +49,24 @@ namespace NinjectSample.Controller
             try
             {
                 var selection = int.Parse(Console.ReadLine());
+                
 
                 //Ninjects returns an instace of the selected gun
                 switch (selection)
                 {
                     case 1:
-                        Console.WriteLine("M16 combat rifle selected.");
                         _selectedGun = _kernel.Get<M16>();
+
                         break;
                     case 2:
-                        Console.WriteLine("pipe pistol selected.");
                         _selectedGun = _kernel.Get<PipeHandGun>();
                         break;
+
                     default:
-                        Console.WriteLine("Please select a valid gun.");
                         GunSelection();
                         break;
                 }
+                Console.WriteLine(_selectedGun.GetName() + " selected.");
             }
             catch (FormatException)
             {
@@ -80,7 +83,8 @@ namespace NinjectSample.Controller
         {
             Console.WriteLine("Gun Action: \n" +
                               "1: Shoot\n" +
-                              "2: Reload\n");
+                              "2: Reload\n" +
+                              "3: Select new gun\n");
             try
             {
                 var selection = int.Parse(Console.ReadLine());
@@ -92,6 +96,10 @@ namespace NinjectSample.Controller
                     case 2:
                         Console.WriteLine(_selectedGun.Reload());
                         break;
+                    case 3:
+                        GunSelection();
+                        break;
+
                     default:
                         Console.WriteLine("Invalid action.");
                         break;

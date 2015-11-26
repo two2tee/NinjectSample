@@ -39,7 +39,7 @@ namespace NinjectSample.Guns
             if (_ammo == 0) return "Out of ammo.";
 
             _ammo--;
-            return "\nFiring" + Name + " ===> PEW PEW\n" + ShowAmmo();
+            return "\nFiring " + Name + " ===> PEW PEW\n" + ShowAmmo();
         }
 
         /// <summary>
@@ -59,6 +59,15 @@ namespace NinjectSample.Guns
         public string ShowAmmo()
         {
             return "Ammo: " + _ammo + "/" + _maxAmmoCapacity;
+        }
+
+        /// <summary>
+        /// Returns name of gun
+        /// </summary>
+        /// <returns> String</returns>
+        public string GetName()
+        {
+            return _name;
         }
     }
 }

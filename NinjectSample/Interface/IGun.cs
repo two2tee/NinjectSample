@@ -8,5 +8,6 @@
         string Fire();
         string Reload();
         string ShowAmmo();
+        string GetName();
     }
 }
